@@ -4,21 +4,13 @@ import com.cooking.recipe.Entity.Recipe;
 import com.cooking.recipe.Mapper.RecipeMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.jdbc.core.support.SqlLobValue;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.jdbc.support.lob.LobCreator;
-import org.springframework.jdbc.support.lob.TemporaryLobCreator;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.SerializationUtils;
 
 import javax.sql.rowset.serial.SerialBlob;
-import java.io.ByteArrayOutputStream;
-import java.io.ObjectOutputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Map;
 
 @Repository
 public class RecipeDao {
@@ -35,7 +27,7 @@ public class RecipeDao {
 
     public List<Recipe> getRecipeByName(String namePart){
         String nameForSearch = '%' + namePart +'%';
-        return recipeJdbcTemplate.query(FIND_BY_NAME, new RecipeMapper(),  new Object[]{nameForSearch});
+        return recipeJdbcTemplate.query(FIND_BY_NAME, new RecipeMapper(), nameForSearch);
     }
 
     public List<Recipe> getAllRecipes(){
@@ -50,7 +42,7 @@ public class RecipeDao {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        recipeJdbcTemplate.update(INSERT_INTO, new Object[]{recipe.getRecipeName(), blob});
+        recipeJdbcTemplate.update(INSERT_INTO, recipe.getRecipeName(), blob);
     }
 
 
