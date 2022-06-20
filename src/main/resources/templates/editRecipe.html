@@ -14,7 +14,7 @@
         <input th:field="*{recipeName}" id="name"/>
         <br/>
          <div th:each="entry, stat: *{ingredients}">
-            <input type="text" name="value" th:value="${ingredients[__${entry.key}__]}">
+            <input type="text" name="value" th:value="${entry.key}">
             <input type="text" name="value" th:field="*{ingredients[__${entry.key}__]}">
         </div>
     <input type="submit" value="Update"/>

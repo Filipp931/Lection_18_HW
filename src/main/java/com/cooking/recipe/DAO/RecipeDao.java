@@ -21,6 +21,7 @@ public class RecipeDao {
     String INSERT_INTO = "INSERT INTO cooking.recipes (recipe, Ingredients) VALUES (?, ?)";
     String GET_BY_ID = "SELECT * FROM cooking.recipes WHERE id = ?";
     String DELETE = "DELETE FROM cooking.recipes WHERE id = ?";
+    String UPDATE = "UPDATE cooking.recipes SET recipe = ?, Ingredients = ?";
 
     @Autowired
     public RecipeDao(JdbcTemplate recipeJdbcTemplate) {
@@ -53,6 +54,17 @@ public class RecipeDao {
             throwables.printStackTrace();
         }
         recipeJdbcTemplate.update(INSERT_INTO, recipe.getRecipeName(), blob);
+    }
+
+    public void update(Recipe recipe) {
+        byte[] ingredientsBlob = SerializationUtils.serialize(recipe.getIngredients());
+        Blob blob = null;
+        try {
+            blob = new SerialBlob(ingredientsBlob);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        recipeJdbcTemplate.update(UPDATE, recipe.getRecipeName(), blob);
     }
 
 
