@@ -14,7 +14,7 @@ public class Recipe {
     }
 
     public Recipe() {
-        ingredients = new HashMap<>();
+
     }
 
     public long getId() {
