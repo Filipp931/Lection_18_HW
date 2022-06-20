@@ -18,6 +18,7 @@ public class RecipeMapper implements RowMapper<Recipe> {
     @Override
     public Recipe mapRow(ResultSet rs, int rowNum) throws SQLException {
         Recipe recipe = new Recipe();
+        recipe.setId(rs.getLong("id"));
         recipe.setRecipeName(rs.getString("recipe"));
         Blob ingredientsBlob = rs.getBlob("Ingredients");
         Map<String, Double> ingredients = null;

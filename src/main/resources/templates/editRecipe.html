@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit recipe</title>
+</head>
+<body>
+    <form th:method="POST" th:action="@{/edit/{id}(id=${recipe.getId})}" th:object="${recipe}">
+        <label for="name">Recipe: </label>
+        <input th:field="*{recipeName}" id="name"/>
+        <br/>
+         <div th:each="entry : *{ingredients.entrySet()}">
+            <input th:value="${entry.key}">
+            <input th:value="${entry.value}">
+        </div>
+    <input type="submit" value="Update"/>
+    </form>
+    <form th:method="GET" th:action="@{/delete/{id}(id=${recipe.getId})}">
+        <input style='width: 250px; border-radius: 8px; background-color: #4CAF50; '
+               type="submit" value="DELETE" >
+    </form > <br>
+</body>
+</html>

@@ -19,14 +19,24 @@ public class RecipeDao {
     String FIND_BY_NAME = "SELECT * FROM cooking.recipes WHERE recipe LIKE ?";
     String SELECT_ALL = "SELECT * FROM cooking.recipes";
     String INSERT_INTO = "INSERT INTO cooking.recipes (recipe, Ingredients) VALUES (?, ?)";
+    String GET_BY_ID = "SELECT * FROM cooking.recipes WHERE id = ?";
+    String DELETE = "DELETE FROM cooking.recipes WHERE id = ?";
 
     @Autowired
     public RecipeDao(JdbcTemplate recipeJdbcTemplate) {
         this.recipeJdbcTemplate = recipeJdbcTemplate;
     }
 
+    public Recipe getById(Long id) {
+        return recipeJdbcTemplate.queryForObject(GET_BY_ID, new RecipeMapper(), id);
+    }
+
+    public void delete(Long id) {
+        recipeJdbcTemplate.update(DELETE, id);
+    }
+
     public List<Recipe> getRecipeByName(String namePart){
-        String nameForSearch = '%' + namePart +'%';
+        String nameForSearch = '%'+namePart+'%';
         return recipeJdbcTemplate.query(FIND_BY_NAME, new RecipeMapper(), nameForSearch);
     }
 

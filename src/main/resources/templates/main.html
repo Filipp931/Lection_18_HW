@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Main</title>
+</head>
+<body>
+<form th:method="GET" th:action="@{/addNewRecipe}">
+    <input style='width: 250px; border-radius: 8px; background-color: #4CAF50; '
+           type="submit" value="Add new recipe" >
+</form >
+    <h1>Рецепты</h1>
+    <div th:each="recipe : ${recipes}">
+        <a th:href="@{/{id}(id=${recipe.getId})}" th:text="${recipe.getRecipeName}"></a>
+        <div th:each="ingredients : ${recipe.getIngredients}">
+            <span th:text="${ingredients.key}"></span>
+            <span th:text="${ingredients.value}"></span>
+        </div>
+    </div>
+</body>
+</html>

@@ -11,17 +11,13 @@ import org.springframework.context.annotation.ComponentScan;
 import java.util.HashMap;
 import java.util.Map;
 
-@ComponentScan
+@SpringBootApplication
 public class RecipeApplication {
 
 
 
     public static void main(String[] args) {
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(RecipeApplication.class);
-        RecipeDao recipeDao = context.getBean(RecipeDao.class);
-       // addRecipes(recipeDao);
-       // System.out.println(recipeDao.getAllRecipes().toString());
-        System.out.println(recipeDao.getRecipeByName("Kek"));
+        SpringApplication.run(RecipeApplication.class, args);
     }
 
     private static void addRecipes(RecipeDao recipeDao){

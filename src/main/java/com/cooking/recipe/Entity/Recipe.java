@@ -1,9 +1,10 @@
 package com.cooking.recipe.Entity;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class Recipe {
-    private int id;
+    private long id;
     private String recipeName;
     private Map<String, Double> ingredients;
 
@@ -13,22 +14,27 @@ public class Recipe {
     }
 
     public Recipe() {
+        ingredients = new HashMap<>();
     }
 
-    public int getId() {
+    public long getId() {
         return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getRecipeName() {
         return recipeName;
     }
 
-    public Map<String, Double> getIngredients() {
-        return ingredients;
-    }
-
     public void setRecipeName(String recipeName) {
         this.recipeName = recipeName;
+    }
+
+    public Map<String, Double> getIngredients() {
+        return ingredients;
     }
 
     public void setIngredients(Map<String, Double> ingredients) {
